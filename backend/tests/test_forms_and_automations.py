@@ -78,6 +78,15 @@ async def test_form_render_is_embeddable(client):
 async def test_submission_creates_contact_and_triggers_speed_to_lead(client):
     sub = await _workspace(client)
     headers = {"X-SubAccount-ID": sub}
+
+    # Pin an always-open send window so the test is independent of the
+    # wall-clock time it runs at (quiet hours have their own test below).
+    resp = await client.patch(
+        f"/api/v1/sub-accounts/{sub}",
+        json={"quiet_hours_start": "00:00", "quiet_hours_end": "23:59", "timezone": "UTC"},
+    )
+    assert resp.status_code == 200
+
     form = await _published_form(client, headers)
 
     resp = await client.post(
