@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Inter', 'ui-sans-serif', 'system-ui', '-apple-system',
+          'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif',
+        ],
+      },
       colors: {
         // Bound to CSS custom properties so the whole identity can be
         // re-skinned at runtime from BrandingConfig (white-label core).
@@ -20,6 +26,7 @@ export default {
       },
       boxShadow: {
         glow: '0 0 24px rgb(var(--color-primary) / 0.35)',
+        'glow-sm': '0 0 12px rgb(var(--color-primary) / 0.25)',
       },
     },
   },
